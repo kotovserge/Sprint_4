@@ -1,14 +1,14 @@
 package ru.ksmail.samokat;
 
 import pageObjects.HomePage;
+import pageObjects.OrderPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import pageObjects.OrderPage;
+
 import static ru.ksmail.samokat.Resources.orderHeader;
 
 public class HomePageTest {

@@ -1,6 +1,5 @@
 package pageObjects;
 
-<<<<<<< HEAD
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -143,8 +142,3 @@ public class OrderPage extends BasePage {
         createOrderButtonClick();
     }
 }
-
-=======
-public class OrderPage {
-}
->>>>>>> 5cc22aa896feaf28c2b6a81d7e3af10c61362e14

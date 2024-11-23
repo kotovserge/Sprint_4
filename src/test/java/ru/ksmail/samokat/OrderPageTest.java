@@ -77,6 +77,7 @@ public class OrderPageTest {
         // заполняем поля страницы Заказа
         orderPage.enteringOrderData(name, surname, address, subway,
                 telephone, date, periodRental, color, comment);
+        // Проверяем завершение заказа
         orderPage.isOrderPageOpen(textStatusOrderButton, orderPage.statusOrderButtonText());
     }
 

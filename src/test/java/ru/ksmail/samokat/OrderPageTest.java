@@ -1,14 +1,16 @@
 package ru.ksmail.samokat;
 
+import pageObjects.HomePage;
+import pageObjects.OrderPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Before;
-import org.junit.After;
 import org.junit.Test;
+import org.junit.After;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
+import org.openqa.selenium.firefox.FirefoxDriver;
 import static ru.ksmail.samokat.Resources.textStatusOrderButton;
 
 @RunWith(Parameterized.class)
@@ -24,16 +26,23 @@ public class OrderPageTest {
     private final String color;
     private final String comment;
 
-
     @Before
     public void prepare() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+//        WebDriverManager.firefoxdriver().setup();
+//        WebDriver driver = new FirefoxDriver();
+        // Создать объект с домашней страницей
+        HomePage homePage = new HomePage(driver);
+        // Открыть страницу Яндекс Самокат
+        driver.get(homePage.getURL());
+        // Подтверждаем Куки
+        homePage.cookieButtonClick();
     }
 
     public OrderPageTest(String name, String surname, String address,
                          String subway, String telephone, String date,
-                         String periodRental, String color, String comment){
+                         String periodRental, String color, String comment) {
         this.name = name;
         this.surname = surname;
         this.address = address;
@@ -47,7 +56,7 @@ public class OrderPageTest {
 
     @Parameterized.Parameters
     public static Object[][] testDate() {
-        return  new Object[][] {
+        return new Object[][]{
                 {"Петр", "Сидоров", "г.Москва, ул.Некрасовская, д.58",
                         "Октябрьская", "89655124587", "30.11.2024",
                         "трое суток", "серая безысходность", "позвонить от метро"},
@@ -58,31 +67,17 @@ public class OrderPageTest {
     }
 
     @Test
-    public void openOrderPageHeaderButtonClick() {
-        // Открываем страницу Яндекс Самокат
-        driver.get("https://qa-scooter.praktikum-services.ru/");
+    public void OrderTest() {
         // Создаем объект с домашней старницей
         HomePage homePage = new HomePage(driver);
-        // Подтверждаем Куки
-        homePage.cookieButtonClick();
         // Нажимаем кнопку Заказать на чердаке страницы
         homePage.headerOrderButtonClick();
         // Создаем объект со старницей Заказа
         OrderPage orderPage = new OrderPage(driver);
-        // заполняем поля первой страницы Заказа
-        orderPage.fillName(name);
-        orderPage.fillSurname(surname);
-        orderPage.fillAddress(address);
-        orderPage.fillSubway(subway);
-        orderPage.fillTelephone(telephone);
-        orderPage.orderNextButtonClick();
-        orderPage.fillDate(date);
-        orderPage.fillPeriodRental(periodRental);
-        orderPage.fillColor(color);
-        orderPage.fillComment(comment);
-        orderPage.completeButtonClick();
-        orderPage.createOrderButtonClick();
-        orderPage.isOrderPageOpen( textStatusOrderButton, orderPage.statusOrderButtonText());
+        // заполняем поля страницы Заказа
+        orderPage.enteringOrderData(name, surname, address, subway,
+                telephone, date, periodRental, color, comment);
+        orderPage.isOrderPageOpen(textStatusOrderButton, orderPage.statusOrderButtonText());
     }
 
     @After

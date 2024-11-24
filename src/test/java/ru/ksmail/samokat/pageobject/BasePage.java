@@ -1,4 +1,4 @@
-package pageObjects;
+package ru.ksmail.samokat.pageobject;
 
 import org.openqa.selenium.WebDriver;
 

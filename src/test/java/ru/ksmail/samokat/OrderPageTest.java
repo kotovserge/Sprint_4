@@ -1,7 +1,7 @@
 package ru.ksmail.samokat;
 
-import pageObjects.HomePage;
-import pageObjects.OrderPage;
+import ru.ksmail.samokat.pageobject.HomePage;
+import ru.ksmail.samokat.pageobject.OrderPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package pageObjects;
+package ru.ksmail.samokat.pageobject;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
